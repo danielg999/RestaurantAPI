@@ -34,6 +34,11 @@ namespace RestaurantAPI.Entities
                 .HasMaxLength(50);
         }
 
+        internal object Include(Func<object, object> p)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // Precyzowanie typu bazy danych do użycia oraz jak powinno wyglądać do niej połączenie
         {
             optionsBuilder.UseSqlServer(_connectionString);
