@@ -10,7 +10,7 @@ namespace RestaurantAPI.Entities
     {
         // Możliwości: Konfiguracja do połączenie do bazy danych, definicja dodatkowych właściwości dla kolumn w bazie danych
 
-        private string _connectionString = "Server=DESKTOP-07MHBNC;Database=RestaurantDb;Trusted_Connection=True;";
+        private string _connectionString = "Server=DESKTOP-P46VLN4;Database=RestaurantDb;Trusted_Connection=True;";
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishes { get; set; }
