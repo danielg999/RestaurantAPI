@@ -2,7 +2,7 @@
 
 namespace RestaurantAPI.Migrations
 {
-    public partial class Init3 : Migration
+    public partial class init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
