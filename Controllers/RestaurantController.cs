@@ -25,6 +25,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "Nationality")]
         public ActionResult Modify([FromRoute] int id, [FromBody] ModifyRestaurantDto dto)
         {
             _restaurantService.Modify(id, dto);
@@ -41,6 +42,7 @@ namespace RestaurantAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "AtLeast20")]
         public ActionResult<IEnumerable<RestaurantDto>> GetAll()
         {
             var restaurantsDtos = _restaurantService.GetAll();
