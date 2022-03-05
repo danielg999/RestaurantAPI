@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using RestaurantAPI.Entities;
@@ -16,12 +17,14 @@ namespace RestaurantAPI.Services
         private readonly RestaurantDbContext _dbContext;
         private readonly IMapper _mapper;
         private readonly ILogger<RestaurantService> _logger;
+        private readonly IAuthorizationService _authorizationService;
 
-        public RestaurantService(RestaurantDbContext dbContext, IMapper mapper, ILogger<RestaurantService> logger)
+        public RestaurantService(RestaurantDbContext dbContext, IMapper mapper, ILogger<RestaurantService> logger, IAuthorizationService authorizationService)
         {
             this._dbContext = dbContext;
             this._mapper = mapper;
             this._logger = logger;
+            this._authorizationService = authorizationService;
         }
 
         public void Delete(int id)
@@ -79,9 +82,10 @@ namespace RestaurantAPI.Services
             return restaurantsDtos;
         }
 
-        public int Create(CreateRestaurantDto dto)
+        public int Create(CreateRestaurantDto dto, int userId)
         {
             var restaurant = _mapper.Map<Restaurant>(dto);
+            restaurant.CreatedById = userId;
             _dbContext.Restaurants.Add(restaurant);
             _dbContext.SaveChanges();
             return restaurant.Id;

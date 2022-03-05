@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using RestaurantAPI.Models;
 using RestaurantAPI.Services;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Controllers
 {
@@ -36,7 +37,8 @@ namespace RestaurantAPI.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
         {
-            var id = _restaurantService.Create(dto);
+            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+            var id = _restaurantService.Create(dto, userId);
 
             return Created($"api/restaurant/{id}", null);
         }
