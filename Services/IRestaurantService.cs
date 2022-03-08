@@ -1,5 +1,6 @@
 ﻿using RestaurantAPI.Models;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace RestaurantAPI.Services
 {
@@ -9,8 +10,8 @@ namespace RestaurantAPI.Services
         RestaurantDto GetById(int id);
         IEnumerable<RestaurantDto> GetAll();
 
-        void Delete(int id);
+        void Delete(int id, ClaimsPrincipal user);
 
-        void Modify(int id, ModifyRestaurantDto dto);
+        void Modify(int id, ModifyRestaurantDto dto, ClaimsPrincipal user);
     }
 }
