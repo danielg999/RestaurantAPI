@@ -21,7 +21,7 @@ namespace RestaurantAPI.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete([FromRoute] int id)
         {
-            _restaurantService.Delete(id, User);
+            _restaurantService.Delete(id);
             return NoContent();
         }
 
@@ -29,7 +29,7 @@ namespace RestaurantAPI.Controllers
         [Authorize(Policy = "Nationality")]
         public ActionResult Modify([FromRoute] int id, [FromBody] ModifyRestaurantDto dto)
         {
-            _restaurantService.Modify(id, dto, User);
+            _restaurantService.Modify(id, dto);
             return Ok();
         }
 
@@ -37,8 +37,7 @@ namespace RestaurantAPI.Controllers
         [Authorize(Roles = "Admin,Manager")]
         public ActionResult CreateRestaurant([FromBody] CreateRestaurantDto dto)
         {
-            var userId = int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
-            var id = _restaurantService.Create(dto, userId);
+            var id = _restaurantService.Create(dto);
 
             return Created($"api/restaurant/{id}", null);
         }

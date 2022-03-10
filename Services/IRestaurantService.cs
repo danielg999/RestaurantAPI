@@ -6,12 +6,12 @@ namespace RestaurantAPI.Services
 {
     public interface IRestaurantService
     {
-        int Create(CreateRestaurantDto dto, int userId);
+        int Create(CreateRestaurantDto dto);
         RestaurantDto GetById(int id);
         IEnumerable<RestaurantDto> GetAll();
 
-        void Delete(int id, ClaimsPrincipal user);
+        void Delete(int id);
 
-        void Modify(int id, ModifyRestaurantDto dto, ClaimsPrincipal user);
+        void Modify(int id, ModifyRestaurantDto dto);
     }
 }
