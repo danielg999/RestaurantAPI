@@ -8,8 +8,11 @@ namespace RestaurantAPI.Entities
 {
     public class RestaurantDbContext : DbContext
     {
-        // Możliwości: Konfiguracja do połączenie do bazy danych, definicja dodatkowych właściwości dla kolumn w bazie danych
-        private string _connectionString = "Server=DESKTOP-P46VLN4\\SQLEXPRESS;Database=RestaurantDb;Trusted_Connection=True;";
+        public RestaurantDbContext(DbContextOptions<RestaurantDbContext> options) : base(options)
+        {
+
+        }
+        // Możliwości: Konfiguracja do połączenia do bazy danych, definicja dodatkowych właściwości dla kolumn w bazie danych
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Dish> Dishes { get; set; }
@@ -39,16 +42,6 @@ namespace RestaurantAPI.Entities
             modelBuilder.Entity<Role>()
                 .Property(r => r.Name)
                 .IsRequired();
-        }
-
-        internal object Include(Func<object, object> p)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) // Precyzowanie typu bazy danych do użycia oraz jak powinno wyglądać do niej połączenie
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }
