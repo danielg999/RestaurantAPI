@@ -31,14 +31,14 @@ namespace RestaurantAPI
         {
             Configuration = configuration;
         }
-
+    
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var authenticationSettings = new AuthenticationSettings();
-            Configuration.GetSection("Authentication").Bind(authenticationSettings)
+            Configuration.GetSection("Authentication").Bind(authenticationSettings);
 
             services.AddSingleton(authenticationSettings);
 
